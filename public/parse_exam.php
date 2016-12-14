@@ -22,7 +22,20 @@
             }
         }
     ?>
-    <div id="questions" class="questions"></div>
+
+    <div class="row">
+        <div id="questions" class="questions col-md-8"></div>
+        <div id="control_panel" class="col-md-4 hidden">
+            <h3>Группы вопросов</h3>
+            <div id="groups">
+                <em>Пока не создано ни одной группы</em>
+            </div>
+            <div class="row">
+                <div id="create_group" class="btn btn-primary col-md-offset-1 col-md-4">Создать группу</div>
+                <div id="clear_groups" class="btn btn-default col-md-offset-2 col-md-4">Начать заново</div>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
         var questions = <?php echo json_encode($question_list); ?>
