@@ -24,11 +24,19 @@
     ?>
 
     <div class="row">
-        <div id="questions" class="questions col-md-8"></div>
+        <div class="col-md-8">
+            <div id="questions" class="questions"></div>
+            <form id="create_tickets_form" class="text-center hidden" action="tickets.php" method="POST">
+                <input type="hidden" name="grouped_questions">
+                <div id="create_tickets" class="btn btn-danger btn-lg text-uppercase"><strong>Сформировать билеты</strong></div>
+            </form>
+        </div>
         <div id="control_panel" class="col-md-4 hidden">
             <h3>Группы вопросов</h3>
             <div id="groups">
-                <em>Пока не создано ни одной группы</em>
+                <div class="empty_block">
+                    <em>Пока не создано ни одной группы</em>
+                </div>
             </div>
             <div class="row">
                 <div id="create_group" class="btn btn-primary col-md-offset-1 col-md-4">Создать группу</div>
@@ -40,6 +48,7 @@
     <script type="text/javascript">
         var questions = <?php echo json_encode($question_list); ?>
     </script>
+    <script type="text/javascript" src="/js/parse_exam.js"></script>
 <?php
     include_once "footer.php";
 ?>

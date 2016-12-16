@@ -1,0 +1,19 @@
+.ticket{
+    margin-bottom: 0;
+    padding: 2em 0;
+    border-bottom: 1px solid #cccccc;
+}
+.ticket__header{
+    font-weight: 700;
+    font-family: 1.1em;
+    margin-bottom: 1.6em;
+}
+
+@media print {
+    .ticket {
+        font-size: 16pt;
+        min-height: 70mm;
+        -webkit-column-break-inside: avoid;
+                  page-break-inside: avoid;
+    }
+}

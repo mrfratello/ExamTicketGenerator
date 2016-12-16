@@ -28,20 +28,48 @@ var questionGroups = [],
         }
     }
 
+    function renderGroupName(name) {
+        var groupEl = $('<div>');
+        groupEl.addClass("group_item")
+            .html(name);
+        $('#groups .empty_block').hide();
+        $('#groups').append(groupEl);
+
+    }
+
+    function checkOnExistQuestion() {
+        var questionEls = $('.questions__item :visible', "#questions");
+        if ( !questionEls.length ) {
+            $('#create_tickets_form').removeClass('hidden');
+            $('#questions').addClass("hidden");
+        }
+    }
+
     $("#create_group").on("click", function() {
-        var group = {
-            name: "Группа " + numberGroup,
-            questions: []
-        };
+        var groupName = "Группа " + numberGroup,
+            group = {
+                name: groupName,
+                questions: []
+            };
         var checkedQuestionEls = $('.questions__item :checked:visible', "#questions");
-        checkedQuestionEls.each(function() {
-            var checkBox = $(this).parents('.questions__item'),
-                description = $('.description', checkBox).html();
-            group.questions.push( description );
-            checkBox.addClass("hidden");
-        });
-        numberGroup++;
-        questionGroups.push(group);
-        // TODO вставить группу в блок управления
+        if (checkedQuestionEls.length) {
+            checkedQuestionEls.each(function() {
+                var checkBox = $(this).parents('.questions__item'),
+                    description = $('.description', checkBox).html();
+                group.questions.push( description );
+                checkBox.addClass("hidden");
+            });
+            numberGroup++;
+            questionGroups.push(group);
+            renderGroupName(groupName);
+            checkOnExistQuestion();
+        }
     });
+
+    $("#create_tickets").on("click", function() {
+        var form = $("#create_tickets_form");
+        $("[name=grouped_questions]", form).val( JSON.stringify(questionGroups) );
+        form.submit();
+    });
+
 })(jQuery);
