@@ -1,8 +1,9 @@
 <?php
     session_start();
-    if ( isset($_FILES['examFile']) ) {
+    if ( isset($_FILES['examFile']) && isset($_FILES['examFile']['tmp_name']) ) {
         $data = file_get_contents($_FILES['examFile']['tmp_name']);
     } else {
+        $_SESSION["error_upload"] = "Файл не был загружен";
         header("Location: /");
     }
 
